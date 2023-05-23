@@ -13,14 +13,13 @@ class UserService {
       attributes: ['id', 'user_name', 'password', 'is_admin'],
       where: whereOpt
     })
-
     return res ? res.dataValues : null
   }
   async updateById({id, ...params}) {
     const whereOpt = { id }
     const res = await User.update(params, {where: whereOpt})
     
-    return !!res[0]
+    return Boolean(res[0])
   }
 }
 

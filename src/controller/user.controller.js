@@ -1,16 +1,19 @@
 const jwt = require('jsonwebtoken')
 const { userRegisterError } = require('../constants/err.type')
-const {createUser, getUserInfo, updateById} = require('../service/user.service')
-const {getSongUrlById} = require('../service/song.service')
+
+const { createUser, getUserInfo, updateById } = require('../service/user.service')
+const { createUserInfo } = require('../service/userInfo.service')
+
 
 const {JWT_SECRET} = require('../config/config.default')
 class UserController {
   async register(ctx, next) {
     // 获取数据
-    const { user_name, password } = ctx.request.body
+    const { user_name, password, email } = ctx.request.body
     try {
       // 操作数据库 service层
       const res = await createUser(user_name, password)
+      createUserInfo(user_name, email)
       // 返回结果
       ctx.body = {
         code: 0,
@@ -32,7 +35,9 @@ class UserController {
       ctx.body = {
         code: 0,
         message: '用户登录成功',
+        // 返回值
         result: {
+          user_id: res.id,
           token: jwt.sign(res, JWT_SECRET, {expiresIn: '1d' }) // 过期时间为1天
         }
       }

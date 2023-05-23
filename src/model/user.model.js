@@ -2,8 +2,7 @@ const { DataTypes } = require('sequelize')
 
 const seq = require('../db/seq')
 
-// 创建模型 (Model koa_user -> koa_users)
-const User = seq.define('koa_user', {
+const User = seq.define('user', {
   // id会自动创建
 
   user_name: {

@@ -1,6 +1,8 @@
+const { userRegisterError } = require("../constants/err.type");
+
 module.exports = (err, ctx) => {
-  let status = 500
-  switch (err.code) {
+  let status = 200
+  switch (err && err.code) {
 
     default:
       break;

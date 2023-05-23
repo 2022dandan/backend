@@ -1,4 +1,3 @@
-
 const bcrypt = require('bcryptjs')
 const {getUserInfo} = require('../service/user.service')
 const {userFormatError, userAlreadyExisted, userNotExist, userLoginError, invalidPasswrod} = require('../constants/err.type')
@@ -20,6 +19,7 @@ const verifyUser = async (ctx, next) => {
   const { user_name } = ctx.request.body
   // 是否已存在
   if(await getUserInfo({user_name})) { // 已经存在则返回
+    console.log('error alreadyExisted')
     ctx.app.emit('error', userAlreadyExisted, ctx)
     return
   }

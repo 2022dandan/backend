@@ -9,7 +9,7 @@ router.post('/reviceNote', reviceNote)
 // 查询笔记内容
 router.post('/viewNote', getNoteInfo)
 // 编辑界面 查找到相关笔记，然后修改text
-router.post('/editNote',editNote)
+router.post('/editNote', editNote)
 // 查询所有笔记
 router.post('/AllNote', getNoteAll)
 // 删除笔记

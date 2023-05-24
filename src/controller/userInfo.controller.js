@@ -13,6 +13,7 @@ class UserInfoController {
             result: {
                 id: res.id,
                 name: res.user_name,
+                avatar: res.avatar,
                 email: res.email,
                 sex: res.sex,
                 hobby: res.hobby,

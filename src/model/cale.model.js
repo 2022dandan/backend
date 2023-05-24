@@ -24,6 +24,12 @@ const Cale = seq.define('cale', {
     allowNull: true,
     comment: '事件地点'
   },
+  hasDone: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,
+    comment: '事件是否完成'
+  },
   time: {
     type: DataTypes.STRING,
     allowNull: false,

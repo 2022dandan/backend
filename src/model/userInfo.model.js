@@ -10,6 +10,11 @@ const UserInfo = seq.define('userInfo', {
     unique: true,
     comment: '用户名, 唯一'
   },
+  avatar: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    comment: '用户头像地址'
+  },
   email: {
     type: DataTypes.STRING,
     allowNull: true,

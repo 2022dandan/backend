@@ -19,7 +19,12 @@ const Note = seq.define('note', {
     allowNull: false,
     comment: '种类'
     // 笔记
-  }, 
+  },
+  note_cover: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    comment: '封面'
+  },
   note_parent: {
     type: DataTypes.INTEGER,
     allowNull: false,

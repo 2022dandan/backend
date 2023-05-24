@@ -10,7 +10,7 @@ class UserInfoService {
   async getUserInfo(obj) {
     const whereOpt = {...obj}
     const res = await UserInfo.findOne({
-      attributes: ['id', 'user_name', 'email' , 'sex', 'hobby', 'motto', 'age', 'birthday'],
+      attributes: ['id', 'user_name', 'avatar', 'email' , 'sex', 'hobby', 'motto', 'age', 'birthday'],
       where: whereOpt
     })
     return res.dataValues

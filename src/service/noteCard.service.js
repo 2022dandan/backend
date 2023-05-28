@@ -35,6 +35,18 @@ class NoteCardService {
         })
         return res
     }
+    // 笔记收藏信息
+    async updateNoteCollect({ id, user_name, card_name, card_parent, ...args }) {
+        const res = await NoteCard.update(args, { where: { id, user_name, card_name, card_parent } })
+        return res[0]
+    }
+    async getCollectNoteCardList(obj){
+        const whereOpt = {...obj}
+        const res = await NoteCard.findAll({
+        where: whereOpt
+        })
+        return res
+    }
     // 修改卡片信息
     async updateNoteCardInfo({ user_name, card_name, card_parent, ...args }) {
         const res = await NoteCard.update(args, { where: { user_name, card_name, card_parent } })

@@ -55,6 +55,11 @@ const Note = seq.define('note', {
     allowNull: true,
     comment: '笔记内容详情'
   },
+  note_collect: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    comment: '笔记收藏'
+  },
 })
 
 // 强制同步数据库

@@ -20,7 +20,7 @@ const Diary = seq.define('diary', {
     comment: '日记标题'
   },
   content: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: true,
     comment: '日记内容'
   }, 

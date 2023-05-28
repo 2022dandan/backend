@@ -41,6 +41,11 @@ const NoteCard = seq.define('noteCard', {
     allowNull: false,
     comment: '卡片创建时间'
   },
+  card_collect: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    comment: '卡片收藏'
+  },
 })
 
 // 强制同步数据库

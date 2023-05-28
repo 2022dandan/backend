@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const { verifyNoteCard } = require('../middleware/noteCard.middleware')
-const { createNoteCard, deleteNoteCard, reviceNoteCard,getNoteCardInfo,getCardAll} = require('../controller/noteCard.controller')
+const { createNoteCard, deleteNoteCard, reviceNoteCard,getNoteCardInfo,getCardAll,changeCollect,getCollect} = require('../controller/noteCard.controller')
 const router = new Router({prefix: '/note'})
 // 添加卡片
 router.post('/createNoteCard', verifyNoteCard, createNoteCard)
@@ -12,4 +12,8 @@ router.post('/viewNoteCard',getNoteCardInfo)
 router.post('/reviceNoteCard',reviceNoteCard)
 // 查询所有卡片
 router.post('/AllCard', getCardAll)
+// 收藏夹判定
+router.post('/collectNoteCard', changeCollect)
+// 获取收藏夹卡片
+router.post('/getCollectNoteCard', getCollect)
 module.exports = router

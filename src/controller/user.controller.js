@@ -3,21 +3,29 @@ const { userRegisterError } = require('../constants/err.type')
 
 const { createUser, getUserInfo, updateById } = require('../service/user.service')
 const { createUserInfo } = require('../service/userInfo.service')
-
+const { createNoteBook, getNoteBook } = require('../service/noteBook.service')
 
 const {JWT_SECRET} = require('../config/config.default')
 class UserController {
   async register(ctx, next) {
     // 获取数据
     const { user_name, password, email } = ctx.request.body
+    const noteBook = {
+      user_name: ctx.request.body.user_name,
+      noteBook_category: 3,
+      noteBook_parent: 0,
+      noteBook_name: "我的笔记本",
+      noteBook_content: "我是根目录",
+    }
     try {
       // 操作数据库 service层
       const res = await createUser(user_name, password)
       createUserInfo(user_name, email)
+      await createNoteBook(noteBook)
       // 返回结果
       ctx.body = {
         code: 0,
-        message: '用户注册成功',
+        message: '用户注册成功，根文件创建成功',
         result: {
           id: res.id,
           user_name: res.user_name
@@ -32,13 +40,15 @@ class UserController {
     // 1. 获取用户信息（在token的playload中，记录id、user_name、is_admin）
     try {
       const {password, ...res} = await getUserInfo({user_name})
+      const rootNoteBook = await getNoteBook({user_name, noteBook_parent:0})
       ctx.body = {
         code: 0,
         message: '用户登录成功',
         // 返回值
         result: {
           user_id: res.id,
-          token: jwt.sign(res, JWT_SECRET, {expiresIn: '1d' }) // 过期时间为1天
+          token: jwt.sign(res, JWT_SECRET, {expiresIn: '1d' }), // 过期时间为1天
+          rootNoteBook: rootNoteBook
         }
       }
       

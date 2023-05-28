@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
-const { createNoteCard, getNoteCard ,updateNoteCardInfo,deleteNoteCardInfo,getNoteCardList} = require('../service/noteCard.service')
+const { createNoteCard, getNoteCard ,updateNoteCardInfo,deleteNoteCardInfo,getNoteCardList,updateNoteCollect,getCollectNoteCardList} = require('../service/noteCard.service')
+const { createCollect,deleteCollectInfo } = require('../service/collect.service')
 
 class NoteCardController {
   // 创建卡片
@@ -17,6 +18,33 @@ class NoteCardController {
       console.error('创建失败', err)
     }
   }
+  // 修改收藏信息
+  async changeCollect(ctx, next) {
+    const body = ctx.request.body
+    const collectbody = {
+      category: 1,
+      file_id: body.id,
+      name: body.card_name,
+      user_name:body.user_name
+    }
+    try {
+      if(body.card_collect === 1){
+        await createCollect(collectbody)
+      }
+      else{
+        await deleteCollectInfo(collectbody)
+      }
+        await updateNoteCollect(body)
+        ctx.body = {
+            code: 0,
+            message: '修改收藏信息成功',
+            result: {
+            }
+        }
+    }catch(err) {
+      console.error('笔记收藏信息信息修改失败', err)
+    }
+  } 
   // 修改卡片信息
   async reviceNoteCard(ctx, next) {
     const body = ctx.request.body
@@ -55,6 +83,19 @@ class NoteCardController {
         }
     }catch(err) {
       console.error('笔记信息获取失败', err)
+    }
+  }
+  async getCollect(ctx, next){
+    const { user_name, card_collect } = ctx.request.body
+    try {
+        const res = await getCollectNoteCardList({user_name,card_collect})
+        ctx.body = {
+            code: 0,
+            message: '获取当前文件收藏卡片信息',
+            result: res
+        }
+    }catch(err) {
+      console.error('当前文件所有卡片信息获取失败', err)
     }
   }
   //删除卡片

@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const { verifyNote } = require('../middleware/note.middleware')
-const { createNote, reviceNote, getNoteInfo, deleteNote,getNoteAll,editNote} = require('../controller/note.controller')
+const { createNote, reviceNote, getNoteInfo, deleteNote,getNoteAll,editNote,changeCollect,getCollect} = require('../controller/note.controller')
 const router = new Router({prefix: '/note'})
 // 添加笔记
 router.post('/createNote', verifyNote, createNote)
@@ -8,10 +8,14 @@ router.post('/createNote', verifyNote, createNote)
 router.post('/reviceNote', reviceNote)
 // 查询笔记内容
 router.post('/viewNote', getNoteInfo)
+// 收藏夹判定
+router.post('/collectNote', changeCollect)
 // 编辑界面 查找到相关笔记，然后修改text
 router.post('/editNote', editNote)
 // 查询所有笔记
 router.post('/AllNote', getNoteAll)
 // 删除笔记
 router.post('/deleteNote', deleteNote)
+// 获取收藏夹卡片
+router.post('/getCollectNote', getCollect)
 module.exports = router

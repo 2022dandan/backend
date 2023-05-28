@@ -6,6 +6,7 @@ class UserInfoController {
     // 1. 获取用户信息
     const { user_name } = ctx.query
     try {
+      console.log(user_name,"//////")
         const res = await getUserInfo({user_name})
         ctx.body = {
             code: 0,

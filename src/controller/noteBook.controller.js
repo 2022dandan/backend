@@ -47,6 +47,7 @@ class NoteBookController {
               noteBook_category:res.noteBook_category,
               noteBook_parent:res.noteBook_parent,
               noteBook_type:res.noteBook_type,
+              noteBook_haveType:res.noteBook_haveType,
               noteBook_content:res.noteBook_content,
               noteBook_detail:res.noteBook_detail,
               createNoteBook:res.createAt,
@@ -84,6 +85,35 @@ class NoteBookController {
         }
     }catch(err) {
       console.error('文件获取失败', err)
+    }
+  }
+  async getPreNoteBook(ctx, next) {
+
+    const curr = {
+      user_name:ctx.request.body.user_name,
+      id:ctx.request.body.noteBook_parent
+    }
+    try {
+        const res = await getNoteBook(curr)
+        ctx.body = {
+            code: 0,
+            message: '获取笔记信息',
+            result: {
+              id: res.id,
+              user_name:res.userBook_name,
+              noteBook_name:res.noteBook_name,
+              noteBook_category:res.noteBook_category,
+              noteBook_parent:res.noteBook_parent,
+              noteBook_type:res.noteBook_type,
+              noteBook_haveType:res.noteBook_haveType,
+              noteBook_content:res.noteBook_content,
+              noteBook_detail:res.noteBook_detail,
+              createNoteBook:res.createAt,
+              updateNoteBook:res.updateAt,
+            }
+        }
+    }catch(err) {
+      console.error('笔记信息获取失败', err)
     }
   }
 }

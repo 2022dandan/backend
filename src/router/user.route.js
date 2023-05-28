@@ -6,9 +6,8 @@ const { userValidator, verifyUser, cryptPassword, verifyLogin } = require('../mi
 const { register, login, changePassword } = require('../controller/user.controller')
 const { auth } = require('../middleware/auth.middleware')
 
-// 注册接口, 验证格式， 判断用户是否存在
+// 注册接口, 验证格式， 判断用户是否存在，不存在创建初始根文件夹
 router.post('/register', userValidator, verifyUser, cryptPassword, register)
-
 // 登录接口
 router.post('/login', userValidator, verifyLogin, login)
 

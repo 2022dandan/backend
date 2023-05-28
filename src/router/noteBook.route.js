@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const { verifyNoteBook } = require('../middleware/noteBook.middleware')
-const { createNoteBook, deleteNoteBook, reviceNoteBook,getNoteBookInfo, getNoteBookAll} = require('../controller/noteBook.controller')
+const { createNoteBook, deleteNoteBook, reviceNoteBook,getNoteBookInfo, getNoteBookAll,getPreNoteBook} = require('../controller/noteBook.controller')
 const router = new Router({prefix: '/note'})
 // 添加笔记本
 router.post('/createNoteBook', verifyNoteBook, createNoteBook)
@@ -12,4 +12,6 @@ router.post('/viewNoteBook',getNoteBookInfo)
 router.post('/reviseNoteBook',reviceNoteBook)
 // 查询所有文件
 router.post('/AllNoteBook', getNoteBookAll)
+// 查询一个文件信息
+router.post('/getPreNoteBook', getPreNoteBook)
 module.exports = router

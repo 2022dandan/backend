@@ -27,6 +27,14 @@ class NoteService {
         })
         return res
     }
+    // 获取收藏列表
+    async getCollectNote(obj){
+        const whereOpt = {...obj}
+        const res = await Note.findAll({
+        where: whereOpt
+        })
+        return res
+    }
     // 获取卡片信息
     async getNote(obj) {
         const whereOpt = {...obj}
@@ -38,6 +46,11 @@ class NoteService {
     // 修改笔记信息
     async updateNoteInfo({ user_name, note_name, note_parent, ...args }) {
         const res = await Note.update(args, { where: { user_name, note_name, note_parent } })
+        return res[0]
+    }
+    // 笔记收藏信息
+    async updateNoteCollect({ id,user_name, note_name, note_parent, ...args }) {
+        const res = await Note.update(args, { where: { id, user_name, note_name, note_parent } })
         return res[0]
     }
     // 删除笔记信息
